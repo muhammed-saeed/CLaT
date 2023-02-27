@@ -1,0 +1,57 @@
+fairseq-preprocess --source-lang pcm --target-lang en --trainpref "/home/CE/musaeed/ironside_nmt/entire_parrellel/train/train" --validpref "/home/CE/musaeed/ironside_nmt/entire_parrellel/val/val" --testpref "/home/CE/musaeed/ironside_nmt/entire_parrellel/test/test" --destdir "/home/CE/musaeed/ironside_nmt/entire_parrellel/pcm_en.tokenized.pcm-en" --thresholdsrc 0 --thresholdtgt 0
+
+
+
+fairseq-train "/home/CE/musaeed/ironside_nmt/entire_parrellel/pcm_en.tokenized.pcm-en"  --arch transformer   --dropout 0.1  --attention-dropout 0.0   --encoder-embed-dim 512   --encoder-ffn-embed-dim 2048  --encoder-layers 6   --encoder-attention-heads 8  --encoder-learned-pos   --decoder-embed-dim 512   --decoder-ffn-embed-dim 2048   --decoder-layers 6   --decoder-attention-heads 8   --decoder-learned-pos   --max-epoch 350   --optimizer adam   --lr 5e-4   --batch-size 128   --seed 1   --encoder-layerdrop 0.0   --decoder-layerdrop 0.0  --criterion=label_smoothed_cross_entropy --activation-dropout 0 --warmup-updates 4000 --source-lang=pcm --target-lang=en --label-smoothing=0.1 --lr-scheduler=inverse_sqrt --save-dir /home/CE/musaeed/ironside_nmt/checkpoints/ --no-epoch-checkpoints  --find-unused-parameters  --ddp-backend=no_c10d --log-format=json --log-interval=10 2>&1 | tee "/home/CE/musaeed/en_pcm_450_default_arch_training_log.log"
+
+
+
+##########################################3
+
+En to PCM
+
+fairseq-preprocess --source-lang en --target-lang pcm --trainpref "/home/CE/musaeed/ironside_nmt/entire_parrellel/train/train" --validpref "/home/CE/musaeed/ironside_nmt/entire_parrellel/val/val" --testpref "/home/CE/musaeed/ironside_nmt/entire_parrellel/test/test" --destdir "/home/CE/musaeed/ironside_nmt/entire_parrellel/en_pcm.tokenized.en-pcm" --thresholdsrc 0 --thresholdtgt 0
+
+
+
+ fairseq-train "/home/CE/musaeed/ironside_nmt/entire_parrellel/en_pcm.tokenized.en-pcm"  --arch transformer   --dropout 0.1  --attention-dropout 0.0   --encoder-embed-dim 512   --encoder-ffn-embed-dim 2048  --encoder-layers 6   --encoder-attention-heads 8  --encoder-learned-pos   --decoder-embed-dim 512   --decoder-ffn-embed-dim 2048   --decoder-layers 6   --decoder-attention-heads 8   --decoder-learned-pos   --max-epoch 550   --optimizer adam   --lr 5e-4   --batch-size 64   --seed 1   --encoder-layerdrop 0.0   --decoder-layerdrop 0.0  --criterion=label_smoothed_cross_entropy --activation-dropout 0 --warmup-updates 4000 --source-lang=en --target-lang=pcm --label-smoothing=0.5 --lr-scheduler=inverse_sqrt --save-dir /home/CE/musaeed/ironside_nmt/en_pcm_checkpoint --find-unused-parameters  --ddp-backend=no_c10d --log-format=json --log-interval=10 2>&1 | tee "/home/CE/musaeed/en_pcm_550_default_arch_training_log.log"
+
+
+
+
+
+
+
+
+
+
+
+
+
+******************************
+PCM to En
+/home/VD/cychang/
+
+
+ fairseq-preprocess --source-lang pcm --target-lang en --trainpref "/home/VD/cychang/ironside_nmt/JW300 with bible/train/train" --validpref "/home/VD/cychang/ironside_nmt/JW300 with bible/val/val" --testpref "/home/VD/cychang/ironside_nmt/JW300 with bible/test/test" --destdir "/home/VD/cychang/ironside_nmt/JW300 with bible/pcm_en.tokenized.pcm-en" --thresholdsrc 0 --thresholdtgt 0
+
+
+ fairseq-train "/home/VD/cychang/ironside_nmt/JW300 with bible/pcm_en.tokenized.pcm-en"  --arch transformer   --dropout 0.1  --attention-dropout 0.0   --encoder-embed-dim 512   --encoder-ffn-embed-dim 2048  --encoder-layers 6   --encoder-attention-heads 8  --encoder-learned-pos   --decoder-embed-dim 512   --decoder-ffn-embed-dim 2048   --decoder-layers 6   --decoder-attention-heads 8   --decoder-learned-pos   --max-epoch 550   --optimizer adam   --lr 5e-4   --batch-size 256   --seed 1   --encoder-layerdrop 0.0   --decoder-layerdrop 0.0  --criterion=label_smoothed_cross_entropy --activation-dropout 0 --warmup-updates 4000 --source-lang=pcm --target-lang=en --label-smoothing=0.1 --lr-scheduler=inverse_sqrt --save-dir  /home/VD/cychang/ironside_nmt/checkpoints/ --no-epoch-checkpoints  --find-unused-parameters  --ddp-backend=no_c10d --log-format=json --log-interval=10 2>&1 |  tee -a "/home/VD/cychang/default_arch_training_log.log"
+
+
+fairseq-generate  "/home/VD/cychang/ironside_nmt/JW300 with bible/pcm_en.tokenized.pcm-en"  --path checkpoints/checkpoint_best.pt    --batch-size 128    --beam 5  --seed 1 --scoring bleu > 550_epoch_output.txt
+
+
+###################################################################
+##############
+###################################################################
+EN to PCM
+
+fairseq-preprocess --source-lang en --target-lang pcm --trainpref "/home/VD/cychang/ironside_nmt/JW300 with bible/train/train" --validpref "/home/VD/cychang/ironside_nmt/JW300 with bible/val/val" --testpref "/home/VD/cychang/ironside_nmt/JW300 with bible/test/test" --destdir "/home/VD/cychang/ironside_nmt/JW300 with bible/en_pcm.tokenized.en-pcm" --thresholdsrc 0 --thresholdtgt 0
+
+
+fairseq-train "/home/VD/cychang/ironside_nmt/JW300 with bible/en_pcm.tokenized.en-pcm"  --arch transformer   --dropout 0.1  --attention-dropout 0.0   --encoder-embed-dim 512   --encoder-ffn-embed-dim 2048  --encoder-layers 6   --encoder-attention-heads 8  --encoder-learned-pos   --decoder-embed-dim 512   --decoder-ffn-embed-dim 2048   --decoder-layers 6   --decoder-attention-heads 8   --decoder-learned-pos   --max-epoch 550   --optimizer adam   --lr 5e-4   --batch-size 256   --seed 1   --encoder-layerdrop 0.0   --decoder-layerdrop 0.0  --criterion=label_smoothed_cross_entropy --activation-dropout 0 --warmup-updates 4000 --source-lang=en --target-lang=pcm --label-smoothing=0.1 --lr-scheduler=inverse_sqrt --save-dir  /home/VD/cychang/ironside_nmt/en_pcm_checkpoints/ --no-epoch-checkpoints  --find-unused-parameters  --ddp-backend=no_c10d --log-format=json --log-interval=10 2>&1 |  tee  "/home/VD/cychang/en_pcm_default_arch_training_log.log"
+
+
+
+fairseq-generate  "/home/VD/cychang/ironside_nmt/JW300 with bible/en_pcm.tokenized.en-pcm"  --path checkpoints/checkpoint_last.pt    --batch-size 128    --beam 5  --seed 1 --scoring bleu > /home/VD/cychang/ironside_nmt/en_pcm_550_epoch_output.txt
