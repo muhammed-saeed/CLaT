@@ -52,19 +52,8 @@ def prepare_translation_datasets(data_path):
 model_output_dir = "/home/CE/musaeed/t5_translation/cnt_epoch_15_output_using_the_prefix_for_training_mt_base/checkpoint-124900-epoch-5"
 model = T5Model("mt5", model_output_dir, args=model_args, cuda_devices=[2,6])
 
-# eval_df = pd.read_csv("/home/CE/musaeed/Naija-Pidgin/t5_translation/data/tsv/eval.tsv", sep="\t").astype(str)
 
-# pcm_truth = [eval_df.loc[eval_df["prefix"] == "translate english to pcm"]["target_text"].tolist()]
-# to_pcm = eval_df.loc[eval_df["prefix"] == "translate english to pcm"]["input_text"].tolist()
-# pcm_truth_list = eval_df.loc[eval_df["prefix"] == "translate english to pcm"]["target_text"].tolist()
-
-# english_truth = [eval_df.loc[eval_df["prefix"] == "translate pcm to english"]["target_text"].tolist()]
-# to_english = eval_df.loc[eval_df["prefix"] == "translate pcm to english"]["input_text"].tolist()
-# english_truth_list = eval_df.loc[eval_df["prefix"] == "translate pcm to english"]["target_text"].tolist()
-
-# pcm_mono_path = "/home/CE/musaeed/t5_translation/backtranslation/pcmreal_enbt_clean_blank_lines/pcm_entire_mono.txt"
-#USING SEQUANCE DISTILLATION
-pcm_mono_path = "/home/CE/musaeed/t5_translation/backtranslation/enreal_pcmbt/real_english_to_pcm_using_mt5_base.txt"
+pcm_mono_path = "PATH_TO_MONOLINGUAL_PCM"
 
 english_mono_path = ""
 pcm_data = open(pcm_mono_path,"r").readlines()
@@ -75,40 +64,30 @@ pcm2en = "translate pcm to english: "
 # to_pcm_ = [en2pcm + s for s in to_pcm]
 to_english_  = [pcm2en + s for s in to_english]
 
+pcm_preds = model.predict(to_english_)
 
-print(f"the english data is {to_english[:10]}")
-print("#################################################")
-# string_ = " ".join(pcm_truth[0])
-# lines = pcm_truth[0].split(",")
-# print(f"the lenght of pcm_truth is {len(pcm_truth_list)}")
-# print(f"examples of pcm_truth {pcm_truth}")
 
-# Predict
-# pcm_preds = model.predict(to_pcm_)
+with open("PATH_TO_SyntheticEnglish","w", encoding="utf-8") as fb:
+    for line in pcm_preds:
+        fb.write(line)
+        fb.write("\n")
 
 
 
 
-
+english_mono_path = 'PATH_TO_MONO_ENGLISH'
 
 
 en2pcm = "translate english to pcm: "
 pcm2en = "translate pcm to english: "
 # to_pcm_ = [en2pcm + s for s in to_pcm]
-to_english_  = [pcm2en + s for s in to_english]
+to_pcm_  = [en2pcm + s for s in to_english]
 
 
-print(f"the english data is {to_english[:10]}")
-print("#################################################")
-# string_ = " ".join(pcm_truth[0])
-# lines = pcm_truth[0].split(",")
-# print(f"the lenght of pcm_truth is {len(pcm_truth_list)}")
-# print(f"examples of pcm_truth {pcm_truth}")
 
-# Predict
-pcm_preds = model.predict(to_english_)
+english_pred = model.predict(to_pcm_)
 
-with open("/home/CE/musaeed/t5_translation/backtranslation/pcm_bt_sequance_distillation_into_english_using_vit/pcm_sequance_distillation_real2en.txt","w", encoding="utf-8") as fb:
+with open("PATH_TO_SyntheticPCM.txt","w", encoding="utf-8") as fb:
     for line in pcm_preds:
         fb.write(line)
         fb.write("\n")

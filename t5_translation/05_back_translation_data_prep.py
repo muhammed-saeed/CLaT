@@ -1,10 +1,10 @@
 import os
 import pandas as pd
 
-real_pcm_path = "/local/musaeed/OrthographicVariationModelT5Enbase/pcmRealEnBT/realPCM.txt"
-bt_en_path = "/local/musaeed/OrthographicVariationModelT5Enbase/pcmRealEnBT/pcmreal2en.txt"
-bt_pcm_path = "/local/musaeed/OrthographicVariationModelT5Enbase/EnglishRealPCMBT/enreal2pcm.txt"
-real_en = '/local/musaeed/OrthographicVariationModelT5Enbase/EnglishRealPCMBT/realEnglish.txt'
+real_pcm_path = "PATH_TO_MONOLINGUAL_lPCM.txt"
+bt_en_path = "PATH_TO_THE_FAKE_ENGLISH_DATA_ASSOCIATED_WITH_REAL_MONO_PCM.txt"
+bt_pcm_path = "PATH_TO_FAKE_PCM_DATA_ASSOCIATED_WITH_REAL_MONO_ENGLISH"
+real_en = 'PATH_TO_REAL_ENGLISH.txt'
 def prepare_translation_datasets():
     with open(bt_pcm_path, "r", encoding="utf-8") as f:
         pcm_text = f.readlines()
@@ -56,5 +56,4 @@ def prepare_translation_datasets():
     return train_df_
 
 train_df_ = prepare_translation_datasets()
-train_df_.to_csv("/local/musaeed/OrthographicVariationModelT5Enbase/tsvData/T5Ortho_both_real_pcm_enreal_pcmbt_train.tsv", sep="\t",index = False)
-# eval_df.to_csv("/home/CE/musaeed/t5_translation/data/tsv/eval.tsv", sep="\t", index= False)
+train_df_.to_csv("PATH_TO_SYNTHETIC_PARALLEL_DATA.tsv", sep="\t",index = False)
