@@ -45,11 +45,7 @@ def prepare_translation_datasets(data_path):
     train_df = pd.DataFrame(data, columns=["prefix", "input_text", "target_text"])
 
 
-
-
-# model_output_dir = "/home/CE/musaeed/t5_translation/output_dir/checkpoint-4996-epoch-1"
-# model_output_dir = "/home/CE/musaeed/t5_translation/output_using_the_prefix_for_training/checkpoint-37470-epoch-6"
-model_output_dir = "/home/CE/musaeed/t5_translation/cnt_epoch_15_output_using_the_prefix_for_training_mt_base/checkpoint-124900-epoch-5"
+model_output_dir = "PATH_TO_CHECKPOINT"
 model = T5Model("mt5", model_output_dir, args=model_args, cuda_devices=[2,6])
 
 
