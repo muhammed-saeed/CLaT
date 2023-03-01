@@ -1,0 +1,7 @@
+1- Data preperation is need to map the parallel data from text format into a single tsv file
+2-Translation.py, is the script used to fine-tune T5 or MT5 for translation task
+3- Eval.py is the script to evaluate the T5/mT5 models
+4- BackTranslateDataGenerate.py is the script that takes the real English and PCM data and then generate the corresponding Fake parallel Data
+5- The Back Translation Data Prep is the script used to organize the parrallel synthetic data into TSV formate
+6- T5_training_using_Back_translation is script used to train T5/mT5 model using the synthetic Data
+7- Inference is the script used if the user want the T5/mT5 model to translate user specific input
