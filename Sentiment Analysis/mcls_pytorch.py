@@ -1,4 +1,4 @@
-# Importing the libraries needed
+import argparse
 import pandas as pd
 import torch
 import transformers
@@ -8,36 +8,50 @@ from transformers import RobertaModel, RobertaTokenizer
 import random
 random.seed(1)
 
-tokenizer_folder = "PATH_TO/tokenizer"
-#when to the tokenizer
+# Create an argument parser
+parser = argparse.ArgumentParser(description='Sentiment Analysis')
 
+# Add arguments
+parser.add_argument('--tokenizer_folder', type=str, required=True, help='Path to the tokenizer folder')
+parser.add_argument('--train_path', type=str, required=True, help='Path to the training dataset')
+parser.add_argument('--test_path', type=str, required=True, help='Path to the testing dataset')
+parser.add_argument('--dev_path', type=str, required=True, help='Path to the development dataset')
+parser.add_argument('--model_path', type=str, required=True, help='Path to the model checkpoint')
+parser.add_argument('--epochs', type=int, default=3, help='Number of epochs')
+parser.add_argument('--learning_rate', type=float, default=1e-05, help='Learning rate')
+parser.add_argument('--train_batch_size', type=int, default=4, help='Training batch size')
+parser.add_argument('--valid_batch_size', type=int, default=2, help='Validation batch size')
+parser.add_argument('--max_len', type=int, default=512, help='Maximum sequence length')
 
+args = parser.parse_args()
+
+tokenizer_folder = args.tokenizer_folder
+train_path = args.train_path
+test_path = args.test_path
+dev_path = args.dev_path
+model_path = args.model_path
+EPOCHS = args.epochs
+LEARNING_RATE = args.learning_rate
+TRAIN_BATCH_SIZE = args.train_batch_size
+VALID_BATCH_SIZE = args.valid_batch_size
+MAX_LEN = args.max_len
+
+# Import the remaining libraries
 from transformers import RobertaTokenizerFast, BertTokenizerFast, BertTokenizer
-# Create the tokenizer from a trained one
-MAX_LEN = 512
-tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
-# tokenizer = BertTokenizer.from_pretrained(tokenizer_folder,max_len=MAX_LEN)
-#incase using the bertTokenizer from scratch
-
-
-
-
 
 # Setting up the device for GPU usage
-
 from torch import cuda
 device = 'cuda:3' if cuda.is_available() else 'cpu'
-
-
-train_path = "PATH_TO/pidgin/pcm_train.csv"
-test_path = "PATH_TO/pidgin/pcm_test.csv"
-dev_path = "PATH_TO/pidgin/pcm_dev.csv"
 
 df_train = pd.read_csv(train_path)
 df_dev = pd.read_csv(dev_path)
 frames= [df_train, df_dev]
 df = pd.concat(frames)
 df_test = pd.read_csv(test_path)
+
+
+
+
 
 df = df[['text','label']]
 df_test = df_test[['text', 'label']]
