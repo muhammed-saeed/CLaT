@@ -95,7 +95,7 @@ python3 t5_translation/04_Back_translation_data_generate.py \
     pcm_mono_path "PATH TO MONOLINGUAL PCM DATA" \
     english_mono_path "PATH TO MONOLINGUAL EN DATA" \ 
     synthetic_english_path "PATH TO SAVE THE EN DATA" \
-    synthetic_pcm_path "PATH TO SAVE PCM DATA" \
+    synthetic_pcm_path "PATH TO SAVE PCM DATA" 
 ```
 
 Back-translation data preperation
@@ -107,7 +107,8 @@ python3 t5_translation/05_Back_translation_data_prep.py  \
     --bt_pcm_path PATH_TO_BACK_TRANSLATED_PCM \
     --real_en PATH_TO_REAL_ENGLISH \
     --output_file PATH_TO_OUTPUT_FILE
-    ```
+ 
+ ```
 
 
 ## Multi Class classification training and evaluation
