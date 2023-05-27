@@ -82,7 +82,7 @@ Evaluate the model
 
 Back-translation data generation
 
-`python3 t5_translation/04_Back_translation_data_generate.py \
+```python3 t5_translation/04_Back_translation_data_generate.py \
     model_output_dir "PATH TO MODEL" \
     pcm_mono_path "PATH TO MONOLINGUAL PCM DATA" \
     english_mono_path "PATH TO MONOLINGUAL EN DATA" \ 
