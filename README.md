@@ -48,7 +48,7 @@ python3 Pre-Processing Bible Code using BLocks/pcm_bible_process.py --pdf_path "
 
 ## Training
 ### Fairseq
--Preprocess
+- Preprocess
 `bash FairseqTranslation/Machine Translation/joint_embeddings/fairseq_preprocess_bpe.sh `
 - Training
 `bash FairseqTranslation/Machine Translation/joint_embeddings/fairseq_train_bpe.sh`
@@ -56,25 +56,30 @@ python3 Pre-Processing Bible Code using BLocks/pcm_bible_process.py --pdf_path "
 `bash FairseqTranslation/Machine Translation/joint_embeddings/fairseq_generate_bpe.sh`
 
 ### T5 Translation
-First Data preperation
-
-
-`python3 t5_translation/01_Data_Preperation.py.py path_to_data_directory `
-
-
-Second Training
-
-`python3 /t5_translation/02_Translation.py.py train_data_path checkpoint_path wandb_project `
-
-Third Evaluate the model
-
+- Data preperation
+`python3 t5_translation/01_Data_Preperation.py.py path_to_data_directory`
+- Training
+`python3 /t5_translation/02_Translation.py.py train_data_path checkpoint_path wandb_project`
+- Evaluate the model
 `python3 t5_translation/03_Eval.py model_path eval_data_path pcm_to_en_results_path en_to_pcm_results_path `
+- Back-translation data generation
+`python3 t5_translation/04_Back_translation_data_generate.py.py model_output_dir pcm_mono_path english_mono_path synthetic_english_path synthetic_pcm_path`
+- Back-translation data preperation
+`python3 t5_translation/05_Back_translation_data_prep.py --real_pcm_path PATH_TO_REAL_PCM --bt_en_path PATH_TO_BACK_TRANSLATED_ENGLISH --bt_pcm_path PATH_TO_BACK_TRANSLATED_PCM --real_en PATH_TO_REAL_ENGLISH --output_file PATH_TO_OUTPUT_FILE`
 
-Fourth Back-translation data generation
 
-`python3 t5_translation/04_Back_translation_data_generate.py.py model_output_dir pcm_mono_path english_mono_path synthetic_english_path synthetic_pcm_path `
+## Multi Class classification training and evaluation
 
-Fifth Back-translation data preperation
-
-`python3 t5_translation/05_Back_translation_data_prep.py --real_pcm_path PATH_TO_REAL_PCM --bt_en_path PATH_TO_BACK_TRANSLATED_ENGLISH --bt_pcm_path PATH_TO_BACK_TRANSLATED_PCM --real_en PATH_TO_REAL_ENGLISH --output_file PATH_TO_OUTPUT_FILE `
-
+```
+python your_script.py \
+    --tokenizer_folder "PATH_TO/tokenizer" \
+    --train_path "PATH_TO/pidgin/pcm_train.csv" \
+    --test_path "PATH_TO/pidgin/pcm_test.csv" \
+    --dev_path "PATH_TO/pidgin/pcm_dev.csv" \
+    --model_path "PATH_TO_CHECKPOINT" \
+    --epochs 3 \
+    --learning_rate 1e-05 \
+    --train_batch_size 4 \
+    --valid_batch_size 2 \
+    --max_len 512
+```
