@@ -13,7 +13,13 @@ logging.basicConfig(level=logging.INFO)
 transformers_logger = logging.getLogger("transformers")
 transformers_logger.setLevel(logging.WARNING)
 
+parser = argparse.ArgumentParser(description="Evaluate a T5 Model.")
+parser.add_argument("model_path", help="Path to your model directory.")
+parser.add_argument("eval_data_path", help="Path to your evaluation dataset.")
+parser.add_argument("pcm_to_en_results_path", help="Path to save your results.")
+parser.add_argument("en_to_pcm_results_path", help="Path to save your results.")
 
+args = parser.parse_args()
 
 model_args = T5Args()
 model_args.max_length = 128
@@ -22,11 +28,10 @@ model_args.num_beams = 5
 model_args.eval_batch_size = 32
 
 
-model_output_dir = "PATH_TO_YUOR_MODEL"
 
-model = T5Model("t5", model_output_dir, args=model_args, )#cuda_devices=[6])
+model = T5Model("t5", args.model_path, args=model_args, )#cuda_devices=[6])
 
-eval_df = pd.read_csv("PATH_TO_EVAL_DATASET/eval.tsv", sep="\t").astype(str)
+eval_df = pd.read_csv(args.eval_data_path, sep="\t").astype(str)
 
 pcm_truth = [eval_df.loc[eval_df["prefix"] == "translate english to pcm"]["target_text"].tolist()]
 to_pcm = eval_df.loc[eval_df["prefix"] == "translate english to pcm"]["input_text"].tolist()
@@ -53,7 +58,7 @@ print("English to Pidgin: ", en_pcm_bleu.score)
 
 print(f"the type of the prediction is type(pcm_preds)")
 
-with open("PAHT_TO_REPORT_RESULTS", "w", encoding="utf-8") as fb:
+with open(args.en_to_pcm_results_path, "w", encoding="utf-8") as fb:
     counter=0
     for index,pcm in enumerate(pcm_preds):
         source_line = "src: " + to_pcm[counter] + "\n"
@@ -74,7 +79,7 @@ pcm_en_bleu = sacrebleu.corpus_bleu(english_preds, english_truth)
 print("Pidgin to English: ", pcm_en_bleu.score)
 
 counter=0
-with open("PATH_TO_REPORT_RESULTS.txt", "w", encoding="utf-8") as fb:
+with open(args.pcm_to_en_results_path, "w", encoding="utf-8") as fb:
     for index,en in enumerate(english_preds):
         source_line =  "src: " + to_english[counter] + "\n"
         fb.write(source_line)

@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import argparse
 
 def prepare_translation_datasets(data_path):
     with open(os.path.join(data_path, "train.pcm"), "r", encoding="utf-8") as f:
@@ -125,11 +126,16 @@ def prepare_translation_datasets(data_path):
     )
     return train_df_, eval_df
 
-train_df, eval_df = prepare_translation_datasets("/local/musaeed/Naija-Pidgin/t5_translation/data")
-# train_df.to_csv("/home/CE/musaeed/t5_translation/data/tsv/train.tsv", sep="\t",index = False)
-# eval_df.to_csv("/home/CE/musaeed/t5_translation/data/tsv/eval.tsv", sep="\t", index= False)
 
-train_df = train_df.sample(frac=1)
-eval_df = eval_df.sample(frac=1)
-train_df.to_csv("/local/musaeed/Naija-Pidgin/t5_translation/data/trainValAugmentationAppendNew/8_more_tsv/train.tsv", sep="\t",index = False)
-eval_df.to_csv("/local/musaeed/Naija-Pidgin/t5_translation/data/trainValAugmentationAppendNew/8_more_tsv/eval.tsv", sep="\t", index= False)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Prepares translation datasets.")
+    parser.add_argument("data_path", help="Path to the directory containing data files.")
+    args = parser.parse_args()
+
+    train_df, eval_df = prepare_translation_datasets(args.data_path)
+
+    train_df = train_df.sample(frac=1)
+    eval_df = eval_df.sample(frac=1)
+    train_df.to_csv(os.path.join(args.data_path, "trainValAugmentationAppendNew/8_more_tsv/train.tsv"), sep="\t", index=False)
+    eval_df.to_csv(os.path.join(args.data_path, "trainValAugmentationAppendNew/8_more_tsv/eval.tsv"), sep="\t", index=False)

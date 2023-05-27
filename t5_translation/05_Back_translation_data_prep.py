@@ -1,11 +1,8 @@
 import os
 import pandas as pd
+import argparse
 
-real_pcm_path = "PATH_TO_MONOLINGUAL_lPCM.txt"
-bt_en_path = "PATH_TO_THE_FAKE_ENGLISH_DATA_ASSOCIATED_WITH_REAL_MONO_PCM.txt"
-bt_pcm_path = "PATH_TO_FAKE_PCM_DATA_ASSOCIATED_WITH_REAL_MONO_ENGLISH"
-real_en = 'PATH_TO_REAL_ENGLISH.txt'
-def prepare_translation_datasets():
+def prepare_translation_datasets(real_pcm_path, bt_en_path, bt_pcm_path, real_en):
     with open(bt_pcm_path, "r", encoding="utf-8") as f:
         pcm_text = f.readlines()
         pcm_text = [text.strip("\n") for text in pcm_text]
@@ -51,9 +48,15 @@ def prepare_translation_datasets():
     verify_integrity=False,
     copy=True,
     )
-
-
     return train_df_
 
-train_df_ = prepare_translation_datasets()
-train_df_.to_csv("PATH_TO_SYNTHETIC_PARALLEL_DATA.tsv", sep="\t",index = False)
+parser = argparse.ArgumentParser()
+parser.add_argument("--real_pcm_path", help="Path to the real PCM data.")
+parser.add_argument("--bt_en_path", help="Path to the back-translated English data.")
+parser.add_argument("--bt_pcm_path", help="Path to the back-translated PCM data.")
+parser.add_argument("--real_en", help="Path to the real English data.")
+parser.add_argument("--output_file", help="Path to save the synthetic parallel data.")
+args = parser.parse_args()
+
+train_df_ = prepare_translation_datasets(args.real_pcm_path, args.bt_en_path, args.bt_pcm_path, args.real_en)
+train_df_.to_csv(args.output_file, sep="\t",index = False)
