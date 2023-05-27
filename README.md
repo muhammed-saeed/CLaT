@@ -59,24 +59,46 @@ python3 Pre-Processing Bible Code using BLocks/pcm_bible_process.py --pdf_path "
 
 Data preperation
 
-`python3 t5_translation/01_Data_Preperation.py.py path_to_data_directory`
+`python3 t5_translation/01_Data_Preperation.py path_to_data_directory "PATH TO DATA DIRECTORY `
 
 Training
 
-`python3 /t5_translation/02_Translation.py.py train_data_path checkpoint_path wandb_project`
+```
+python3 /t5_translation/02_Translation.py \
+     train_data_path "PATH TO TRAIN DATA" \
+     checkpoint_path "PATH TO STORE CHECKPOINT"
+     wandb_project "WANDB PROJECT NAME"
+```
 
 Evaluate the model
 
-`python3 t5_translation/03_Eval.py model_path eval_data_path pcm_to_en_results_path en_to_pcm_results_path `
+```python3 t5_translation/03_Eval.py \
+    model_path "PATH TO MODEL" \
+    eval_data_path "PATH TO EVAL DATA" \
+    pcm_to_en_results_path  "PATH TO STORE THE PCM TO EN TRANSLATION RESULTS" \
+    en_to_pcm_results_path "PATH TO STORE THE PCM TO EN TRANSLATION RESULTS"
+ ```
 
 
 Back-translation data generation
 
-`python3 t5_translation/04_Back_translation_data_generate.py.py model_output_dir pcm_mono_path english_mono_path synthetic_english_path synthetic_pcm_path`
+`python3 t5_translation/04_Back_translation_data_generate.py \
+    model_output_dir "PATH TO MODEL" \
+    pcm_mono_path "PATH TO MONOLINGUAL PCM DATA" \
+    english_mono_path "PATH TO MONOLINGUAL EN DATA" \ 
+    synthetic_english_path "PATH TO SAVE THE EN DATA" \
+    synthetic_pcm_path "PATH TO SAVE PCM DATA" \
+```
 
 Back-translation data preperation
 
-`python3 t5_translation/05_Back_translation_data_prep.py --real_pcm_path PATH_TO_REAL_PCM --bt_en_path PATH_TO_BACK_TRANSLATED_ENGLISH --bt_pcm_path PATH_TO_BACK_TRANSLATED_PCM --real_en PATH_TO_REAL_ENGLISH --output_file PATH_TO_OUTPUT_FILE`
+```python3 t5_translation/05_Back_translation_data_prep.py  \
+    --real_pcm_path PATH_TO_REAL_PCM \
+    --bt_en_path PATH_TO_BACK_TRANSLATED_ENGLISH \
+    --bt_pcm_path PATH_TO_BACK_TRANSLATED_PCM \
+    --real_en PATH_TO_REAL_ENGLISH \
+    --output_file PATH_TO_OUTPUT_FILE
+    ```
 
 
 ## Multi Class classification training and evaluation
