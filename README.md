@@ -48,11 +48,17 @@ python3 Pre-Processing Bible Code using BLocks/pcm_bible_process.py --pdf_path "
 
 ## Training
 ### Fairseq
-- Preprocess
+
+Preprocess
+
 `bash FairseqTranslation/Machine Translation/joint_embeddings/fairseq_preprocess_bpe.sh `
-- Training
+
+Training
+
 `bash FairseqTranslation/Machine Translation/joint_embeddings/fairseq_train_bpe.sh`
-- Generate 
+
+Generate 
+
 `bash FairseqTranslation/Machine Translation/joint_embeddings/fairseq_generate_bpe.sh`
 
 ### T5 Translation
@@ -72,7 +78,8 @@ python3 /t5_translation/02_Translation.py \
 
 Evaluate the model
 
-```python3 t5_translation/03_Eval.py \
+```
+python3 t5_translation/03_Eval.py \
     model_path "PATH TO MODEL" \
     eval_data_path "PATH TO EVAL DATA" \
     pcm_to_en_results_path  "PATH TO STORE THE PCM TO EN TRANSLATION RESULTS" \
@@ -82,7 +89,8 @@ Evaluate the model
 
 Back-translation data generation
 
-```python3 t5_translation/04_Back_translation_data_generate.py \
+```
+python3 t5_translation/04_Back_translation_data_generate.py \
     model_output_dir "PATH TO MODEL" \
     pcm_mono_path "PATH TO MONOLINGUAL PCM DATA" \
     english_mono_path "PATH TO MONOLINGUAL EN DATA" \ 
@@ -92,7 +100,8 @@ Back-translation data generation
 
 Back-translation data preperation
 
-```python3 t5_translation/05_Back_translation_data_prep.py  \
+```
+python3 t5_translation/05_Back_translation_data_prep.py  \
     --real_pcm_path PATH_TO_REAL_PCM \
     --bt_en_path PATH_TO_BACK_TRANSLATED_ENGLISH \
     --bt_pcm_path PATH_TO_BACK_TRANSLATED_PCM \
