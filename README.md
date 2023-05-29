@@ -114,7 +114,7 @@ python3 t5_translation/05_Back_translation_data_prep.py  \
 ## Multi Class classification training and evaluation
 
 ```
-python your_script.py \
+python Sentiment Analysis/mcls.py \
     --tokenizer_folder "PATH_TO/tokenizer" \
     --train_path "PATH_TO/pidgin/pcm_train.csv" \
     --test_path "PATH_TO/pidgin/pcm_test.csv" \
