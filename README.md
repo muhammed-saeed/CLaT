@@ -5,7 +5,7 @@ Low-Resource Cross-Lingual Adaptive Training for Nigerian Pidgin
 
 ### Python version
 
-* Python == 3.9.1
+* Python == 3.9
 
 ### Environment
 
