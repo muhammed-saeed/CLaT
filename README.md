@@ -63,7 +63,7 @@ Generate
 
 ### T5 Translation
 
-Data preperation
+Data preparation
 
 `python3 t5_translation/01_Data_Preperation.py path_to_data_directory "PATH TO DATA DIRECTORY `
 
@@ -98,7 +98,7 @@ python3 t5_translation/04_Back_translation_data_generate.py \
     synthetic_pcm_path "PATH TO SAVE PCM DATA" 
 ```
 
-Back-translation data preperation
+Back-translation data preparation
 
 ```
 python3 t5_translation/05_Back_translation_data_prep.py  \
@@ -114,7 +114,7 @@ python3 t5_translation/05_Back_translation_data_prep.py  \
 ## Multi Class classification training and evaluation
 
 ```
-python Sentiment Analysis/mcls.py \
+python3 Sentiment Analysis/mcls.py \
     --tokenizer_folder "PATH_TO/tokenizer" \
     --train_path "PATH_TO/pidgin/pcm_train.csv" \
     --test_path "PATH_TO/pidgin/pcm_test.csv" \
