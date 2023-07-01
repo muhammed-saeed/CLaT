@@ -2,3 +2,5 @@ simpletransformers
 torch==1.12
 numpy
 pandas
+scarebleu
+wandb
