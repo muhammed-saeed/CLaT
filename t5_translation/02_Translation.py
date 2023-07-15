@@ -13,15 +13,15 @@ def train_t5_model(train_data_path, checkpoint_path, wandb_project, best_model, 
 
     model_args = T5Args()
     model_args.max_seq_length = 196
-    model_args.train_batch_size = 8
+    model_args.train_batch_size = 16
     model_args.eval_batch_size = 16
     model_args.num_train_epochs = 20
     model_args.evaluate_during_training = False
     model_args.evaluate_during_training_steps = 30000
     model_args.use_multiprocessing = False
-    model_args.fp16 = True
-    model_args.save_model_every_epoch = False
-    # model_args.best_model_dir = best_model
+    model_args.fp16 = False
+    model_args.save_model_every_epoch = True
+    model_args.best_model_dir = "/local/musaeed/CLaT/checkpoints/bestT5EnAgain"
     model_args.save_steps = -1
     model_args.save_eval_checkpoints = False
     model_args.no_cache = True
@@ -33,14 +33,14 @@ def train_t5_model(train_data_path, checkpoint_path, wandb_project, best_model, 
     model_args.output_dir = checkpoint_path
     model_args.wandb_project = wandb_project
 
-    model = T5Model("mt5", "google/mt5-base", args=model_args)
+    model = T5Model("t5", "t5-base", args=model_args)
     model.train_model(train_df)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train a T5 Model.")
-    parser.add_argument("--train_data_path", default="/local/musaeed/CLaT/dev/data/trainDatawithoutDev.tsv", help="Path to the training data file in TSV format.")
-    parser.add_argument("--checkpoint_path",default= "/local/musaeed/CLaT/checkpoints", help="Path to the checkpoint directory.")
-    parser.add_argument("--wandb_project", default="t5-base trainning on BIBLE_JW300_treebank", help="Name of project in Weights & Biases.")
+    parser.add_argument("--train_data_path", default="/local/musaeed/CLaT/dev/data/trainDatawithoutDevNorTest.tsv", help="Path to the training data file in TSV format.")
+    parser.add_argument("--checkpoint_path",default= "/local/musaeed/CLaT/checkpoints/t5BaseTBDevTest", help="Path to the checkpoint directory.")
+    parser.add_argument("--wandb_project", default="t5-base trainning on BIBLE_JW300_treebank without Treebank dev test", help="Name of project in Weights & Biases.")
     parser.add_argument("--best_model", help="Path to the best_model")
     parser.add_argument("--n_gpu",type=int ,default=3, help="Number of GPUS")
     args = parser.parse_args()

@@ -80,10 +80,10 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate a T5 Model.")
-    parser.add_argument("--model_path", help="Path to your model directory.")
-    parser.add_argument("--eval_data_path", help="Path to your evaluation dataset.")
-    parser.add_argument("--pcm_to_en_results_path", help="Path to save your English to Pidgin results.")
-    parser.add_argument("--en_to_pcm_results_path", help="Path to save your Pidgin to English results.")
+    parser.add_argument("--model_path", default="/local/musaeed/CLaT/checkpoints/checkpoint-14503-epoch-1",help="Path to your model directory.")
+    parser.add_argument("--eval_data_path", default="/local/musaeed/CLaT/dev/data/eval.tsv",help="Path to your evaluation dataset.")
+    parser.add_argument("--pcm_to_en_results_path", default="/local/musaeed/CLaT/results/pcm2en.txt", help="Path to save your English to Pidgin results.")
+    parser.add_argument("--en_to_pcm_results_path", default="/local/musaeed/CLaT/results/en2pcm.txt", help="Path to save your Pidgin to English results.")
     args = parser.parse_args()
 
     main(args)
