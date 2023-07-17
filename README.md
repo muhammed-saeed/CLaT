@@ -141,3 +141,18 @@ python3 Sentiment Analysis/mcls.py \
     --valid_batch_size 2 \
     --max_len 512
 ```
+
+
+
+### Inference Examples
+
+
+|      Input Sentence in English      |                     Refrence Translation in Pidgin                     |                    Model's predictions                    |
+|--------------|----------------------------------------------|--------------------------------------------|
+| Keep peace with one another. — MARK 9:50.      | Make una be people wey like peace. — MARK 9:50. | Make una dey do things with each other. — MARK 9:50. |
+| What counsel did Jesus give to help us handle differences in a spirit of love? | Which advice Jesus give wey fit help us use love settle quarrel? | Wetin Jesus talk wey go help us use love settle quarrel? |
+| What questions might a Christian ask himself when deciding how to settle differences with others? | Which question we fit ask ourself if we dey think about how we go take settle the quarrel wey we get with people? | Wetin person wey dey serve Jehovah fit ask imself when e dey settle quarrel with another person? |
+| How can the three steps outlined at Matthew 18:15-17 be used to resolve some conflicts? | How the three things wey Jesus talk for Matthew 18:15-17 fit help us settle quarrel? | Wetin we fit do to settle any quarrel wey dey Matthew 18:15-17? |
+| What human struggles are featured in Genesis, and why is this of interest? | Wetin be the quarrel wey some people get wey dey Genesis? And wetin make am dey Bible? | For Genesis, which kind fight human being dey fight, and why this one concern us? |
+| What attitude spread throughout the world, and what has been the result? | How fight and quarrel take full everywhere today? And wetin this kind thing don cause? | How people for the whole world take dey behave, and wetin don come happen? |
+| How did Jesus teach people to handle disagreements? | Which advice Jesus give about how to settle quarrel? | How Jesus take teach people to handle quarrel? |
