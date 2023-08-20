@@ -2,7 +2,7 @@
 
 ## Install ngrok in conda
 
-``
+`conda install -c conda-forge pyngrok`
 
 ## install flask
 
